@@ -29,7 +29,8 @@ public class EmployeesController {
         return employeesService.listEmployees(prefix);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE})
     @Operation(summary = "Find employee by id",
             description = "Find employee by id.")
     @ApiResponse(responseCode = "200",
