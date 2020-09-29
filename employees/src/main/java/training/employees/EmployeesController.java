@@ -1,5 +1,9 @@
 package training.employees;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/employees")
 @AllArgsConstructor
+@Tag( name = "Operations on employees")
 public class EmployeesController {
 
     private final EmployeesService employeesService;
@@ -25,7 +30,16 @@ public class EmployeesController {
     }
 
     @GetMapping("/{id}")
-    public EmployeeDto findEmployeeById(@PathVariable long id) {
+    @Operation(summary = "Find employee by id",
+            description = "Find employee by id.")
+    @ApiResponse(responseCode = "200",
+            description = "Employee found")
+    @ApiResponse(responseCode = "404",
+            description = "Employee not found")
+    public EmployeeDto findEmployeeById(
+            @Parameter(description = "Id of the employee",
+                    example = "1")
+            @PathVariable long id) {
         return employeesService.findEmployeeById(id);
     }
 

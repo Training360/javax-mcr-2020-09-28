@@ -19,10 +19,10 @@ public class EmployeesService {
 
     private final ModelMapper modelMapper;
 
-    private static AtomicLong idGenerator =
+    private final AtomicLong idGenerator =
             new AtomicLong();
 
-    private static List<Employee> employees =
+    private final List<Employee> employees =
             Collections.synchronizedList(
                     new ArrayList<>(List.of(
                             new Employee(idGenerator.incrementAndGet(), "John Doe"),
