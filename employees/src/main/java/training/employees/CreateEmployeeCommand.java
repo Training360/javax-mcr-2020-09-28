@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class CreateEmployeeCommand {
 
-//    @NotBlank()
+    @NotBlank()
     @Name(maxLength = 10, message = "Invalid name")
     private String name;
 }

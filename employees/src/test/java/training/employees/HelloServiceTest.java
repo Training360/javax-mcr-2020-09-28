@@ -13,6 +13,6 @@ public class HelloServiceTest {
 //        var message = service.sayHello();
 //        assertThat(message).startsWith("Hello Spring");
 
-        assertThat(new HelloService().sayHello()).startsWith("Hello Spring");
+        assertThat(new HelloService(new HelloProperties("Hello Spring")).sayHello()).startsWith("Hello Spring");
     }
 }
