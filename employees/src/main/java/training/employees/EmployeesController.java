@@ -8,13 +8,18 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -46,7 +51,9 @@ public class EmployeesController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeDto createEmployee(@RequestBody CreateEmployeeCommand command) {
+    public EmployeeDto createEmployee(
+            @Valid
+            @RequestBody CreateEmployeeCommand command) {
         return employeesService.createEmployee(command);
     }
 
@@ -72,6 +79,29 @@ public class EmployeesController {
                 .build();
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+                .body(problem);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Problem> handleValidationError(MethodArgumentNotValidException e) {
+        var violations =
+                e.getBindingResult().getFieldErrors()
+                .stream()
+//                .map(error -> new Violation(error.getField(), Arrays.toString(error.getCodes())))
+                .map(error -> new Violation(error.getField(), error.getDefaultMessage()))
+                .collect(Collectors.toList());
+
+        Problem problem = Problem.builder()
+                .withType(URI.create("employees/validation-error"))
+                .withTitle("Validation error")
+                .withStatus(Status.BAD_REQUEST)
+                .withDetail(e.getMessage())
+                .with("violations", violations)
+                .build();
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(problem);
     }
