@@ -16,6 +16,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.when;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.with;
@@ -54,24 +55,11 @@ public class EmployeesRestAssuredIT {
         when()
                 .get("/api/employees")
                 .then()
-                .body("[1].name", equalTo("Jack Doe"));
+                .body("[0].name", equalTo("John Doe"))
+                .and()
+                .body(matchesJsonSchemaInClasspath("employee-dto-schema.json"))
+        ;
     }
 
-    @Test
-    void testCreateEmployee2() {
-        with().body(new CreateEmployeeCommand("Jack Smith")).
-                when()
-                .post("/api/employees")
-                ;
-
-        with().body(new CreateEmployeeCommand("John Smith")).
-                when()
-                .post("/api/employees");
-
-        when()
-                .get("/api/employees")
-                .then()
-                .body("[2].name", equalTo("Jack Smith"));
-    }
 
 }

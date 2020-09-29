@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Employees",
+  "type": "array",
+  "items": [
+    {
+      "title": "EmployeeDto",
+      "type": "object",
+      "required": ["name", "id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "id of the employee",
+          "format": "int64",
+          "example": 12
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the employee",
+          "example": "John Doe"
+        }}}]}

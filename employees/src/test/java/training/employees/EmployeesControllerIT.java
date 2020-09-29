@@ -42,7 +42,7 @@ public class EmployeesControllerIT {
         .param("prefix", "john"))
                 .andDo(print())
                 .andExpect(status().isOk())
-        //.andExpect(jsonPath("$[?(@.id == 2)][0].name", equalTo("John Doe")))
+        .andExpect(jsonPath("$[?(@.id == 2)].name", equalTo(List.of("John Doe"))))
         ;
 
         //verify(employeesService).listEmployees(Optional.of("john"));
