@@ -1,4 +1,4 @@
-package training.employees;
+package training.employees.employees.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,19 +6,15 @@ import org.ff4j.FF4j;
 import org.ff4j.core.Feature;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import training.employees.employees.repository.Employee;
+import training.employees.employees.repository.EmployeeRepository;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor

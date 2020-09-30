@@ -1,8 +1,9 @@
-package training.employees;
+package training.employees.hello.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import training.employees.hello.service.HelloService;
 
 @Controller
 public class HelloController {

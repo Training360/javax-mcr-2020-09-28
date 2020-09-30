@@ -1,6 +1,8 @@
-package training.employees;
+package training.employees.hello;
 
 import org.junit.jupiter.api.Test;
+import training.employees.hello.service.HelloProperties;
+import training.employees.hello.service.HelloService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

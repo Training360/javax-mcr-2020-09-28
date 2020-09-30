@@ -1,4 +1,4 @@
-package training.employees;
+package training.employees.hello.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

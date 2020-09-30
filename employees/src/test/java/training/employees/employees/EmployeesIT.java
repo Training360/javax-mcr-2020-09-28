@@ -1,15 +1,16 @@
-package training.employees;
+package training.employees.employees;
 
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
+import training.employees.employees.controller.EmployeesController;
+import training.employees.employees.service.CreateEmployeeCommand;
+import training.employees.employees.service.EmployeeDto;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
 
 @SpringBootTest
 @Sql(statements = "delete from employees")

@@ -1,8 +1,10 @@
-package training.employees;
+package training.employees.employees;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import training.employees.employees.repository.Employee;
+import training.employees.employees.repository.EmployeeRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

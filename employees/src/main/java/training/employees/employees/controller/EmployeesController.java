@@ -1,4 +1,4 @@
-package training.employees;
+package training.employees.employees.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -12,11 +12,13 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
+import training.employees.employees.service.CreateEmployeeCommand;
+import training.employees.employees.service.EmployeeDto;
+import training.employees.employees.service.EmployeesService;
+import training.employees.employees.service.UpdateEmployeeCommand;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

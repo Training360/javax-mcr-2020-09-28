@@ -1,4 +1,4 @@
-package training.employees;
+package training.employees.employees.service;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
