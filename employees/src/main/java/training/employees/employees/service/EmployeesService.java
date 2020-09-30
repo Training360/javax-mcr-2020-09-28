@@ -6,6 +6,8 @@ import org.ff4j.FF4j;
 import org.ff4j.core.Feature;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.boot.actuate.audit.listener.AuditApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import training.employees.employees.gateway.AddressGateway;
@@ -15,6 +17,7 @@ import training.employees.employees.repository.EmployeeRepository;
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -31,6 +34,8 @@ public class EmployeesService {
     private EmployeeRepository repo;
 
     private AddressGateway addressGateway;
+
+    private ApplicationEventPublisher publisher;
 
     @PostConstruct
     public void initFf4j() {
@@ -56,6 +61,11 @@ public class EmployeesService {
     public EmployeeDto createEmployee(CreateEmployeeCommand command) {
         log.debug("Create employee with name: " + command.getName());
         log.info("Create employee");
+
+        publisher.publishEvent(
+                new AuditApplicationEvent("anonymous",
+                        "employee_has_been_created",
+                        Map.of("name", command.getName())));
 
         if (ff4j.check(FEATURE_UNIQUE_CONTRAINT)) {
 

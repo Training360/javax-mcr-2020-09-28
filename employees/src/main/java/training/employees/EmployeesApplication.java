@@ -6,6 +6,8 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.audit.InMemoryAuditEventRepository;
+import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +29,16 @@ public class EmployeesApplication {
 		return new ObjectMapper()
 				.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL)
 				.findAndRegisterModules();
+	}
+
+	@Bean
+	public InMemoryAuditEventRepository inMemoryAuditEventRepository() {
+		return new InMemoryAuditEventRepository();
+	}
+
+	@Bean
+	public InMemoryHttpTraceRepository inMemoryHttpTraceRepository() {
+		return new InMemoryHttpTraceRepository();
 	}
 
 	@Bean
