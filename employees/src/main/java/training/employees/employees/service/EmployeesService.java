@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import training.employees.employees.gateway.AddressGateway;
 import training.employees.employees.repository.Employee;
 import training.employees.employees.repository.EmployeeRepository;
 
@@ -29,6 +30,8 @@ public class EmployeesService {
 
     private EmployeeRepository repo;
 
+    private AddressGateway addressGateway;
+
     @PostConstruct
     public void initFf4j() {
         ff4j.createFeature(new Feature(FEATURE_UNIQUE_CONTRAINT));
@@ -44,8 +47,10 @@ public class EmployeesService {
 
     public EmployeeDto findEmployeeById(long id) {
         var employee = repo.findById(id).orElseThrow(() -> new IllegalArgumentException("Employee not found: " + id));
-
-        return modelMapper.map(employee, EmployeeDto.class);
+        var address = addressGateway.getAddressByName(employee.getName());
+        var dto = modelMapper.map(employee, EmployeeDto.class);
+        dto.setAddress(address);
+        return dto;
     }
 
     public EmployeeDto createEmployee(CreateEmployeeCommand command) {
