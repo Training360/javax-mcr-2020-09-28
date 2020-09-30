@@ -88,6 +88,17 @@
 			<groupId>org.ff4j</groupId>
 			<artifactId>ff4j-web</artifactId>
 			<version>1.8.9</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.servlet.jsp.jstl</groupId>
+					<artifactId>jstl-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
 		</dependency>
 
 		<dependency>
