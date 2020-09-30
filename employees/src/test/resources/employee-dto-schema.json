@@ -7,7 +7,7 @@
       "title": "EmployeeDto",
       "type": "object",
       "required": ["name", "id"],
-      "additionalProperties": false,
+      "additionalProperties": true,
       "properties": {
         "id": {
           "type": "integer",

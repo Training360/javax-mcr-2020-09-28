@@ -24,6 +24,7 @@ import static io.restassured.module.mockmvc.RestAssuredMockMvc.with;
 import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest
+@Sql(statements = "delete from employees")
 public class EmployeesRestAssuredIT {
 
     @Autowired
@@ -56,7 +57,7 @@ public class EmployeesRestAssuredIT {
         when()
                 .get("/api/employees")
                 .then()
-                .body("[0].name", equalTo("John Doe"))
+                .body("[0].name", equalTo("Jack Doe"))
                 .and()
                 .body(matchesJsonSchemaInClasspath("employee-dto-schema.json"))
         ;

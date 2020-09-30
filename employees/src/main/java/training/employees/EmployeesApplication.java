@@ -1,5 +1,6 @@
 package training.employees;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -24,6 +25,7 @@ public class EmployeesApplication {
 	@Bean
 	public ObjectMapper objectMapper() {
 		return new ObjectMapper()
+				.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL)
 				.findAndRegisterModules();
 	}
 
