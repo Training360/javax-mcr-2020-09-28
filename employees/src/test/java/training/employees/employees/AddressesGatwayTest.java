@@ -2,13 +2,11 @@ package training.employees.employees;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.common.ContentTypes;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.util.MimeType;
 import org.springframework.util.SocketUtils;
 import training.employees.employees.gateway.AddressGateway;
 import training.employees.employees.gateway.GatewayProperties;
